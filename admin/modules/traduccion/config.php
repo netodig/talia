@@ -1,0 +1,1 @@
+<script type="text/javascript" src="<?php echo Url::siteurl() ?>/<?php echo ADMIN_FOLDER ?>/modules/traduccion/assets/js/func.js"></script>

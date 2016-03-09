@@ -1,0 +1,147 @@
+/* CSS Document */
+*
+{
+    font-family:Calibri;
+}
+.menu ul li, .menu a, .menu ul li ul li a, .menu ul li:hover li a
+{	color: #D070AA;
+	font-size:95%;
+	text-decoration:none;
+}
+.menu ul li:hover a,.menu ul li:hover a, .menu ul li:hover li:hover a
+{
+	color:#FFF;
+}
+label,.labelform
+{
+	color:#828282;
+	font-size: 95%;
+	font-weight:bold;
+}
+input[type="button"],input[type="submit"]
+{
+	
+	font-size:100%;
+	font-weight:bold;
+	
+}
+.tablediv table tr th
+{
+	color:#FFF;
+	font-size:100%;
+}
+.tablediv table tr td
+{
+	font-size:90%;
+	color:#6e6e6e;
+}
+
+
+h1
+{
+	font-size:180% !important;
+	color: #C55A9A !important;
+	font-weight:bold;
+	text-align:center;
+	margin-bottom:10px;
+}
+h2
+{
+	font-size:140% !important;
+	color: #C55A9A !important;
+	font-weight:bold;
+	text-align:center;
+	margin-bottom:10px;
+}
+
+h3
+{
+	font-size:100% !important;
+	color: #C55A9A !important;
+	font-weight:bold;
+	margin-bottom:10px;
+}
+
+.submenu h3
+{
+	padding:0px;
+	margin:0px;
+}
+
+fieldset legend
+{
+	font-size:120%;
+	color:#C55A9A;
+}
+.error
+{
+	color:#F00;
+}
+a
+{
+	text-decoration:none;
+	color: #084C9D;
+	font-size:inherit;
+}
+a:hover
+{
+	color: #D070AA;
+}
+
+a.add, a.back, a.anunciar, a.panunciar, .submenu a
+{
+	color:#bebdbd;
+	text-decoration:none;
+	font-weight:bold;
+	font-size:100%;
+}
+a.add:hover, a.back:hover,a.anunciar:hover, a.panunciar:hover, .submenu a:hover
+{
+	color: #D070AA;
+}
+.separator
+{
+	color:#929292;
+}
+
+ul.submenu li ul li a
+{
+	text-decoration:none;
+	color:#7A65EA;
+}
+ul.submenu li ul li a:hover
+{
+	color:#7A65EA;
+}
+
+a.email
+{
+	text-decoration:none;
+	color:#ff7c00;
+}
+
+.red
+{
+	color:#F00;
+}
+
+.preciosolo
+{
+	font-weight:bold;
+}
+.bc .bc_txt
+{
+    color:#FF7C00;
+    font-weight: bold;
+}
+.bc a
+{
+    color: #BEBDBD;
+    font-size: 100%;
+    font-weight: bold;
+    text-decoration: none;
+}
+.bc a:hover
+{
+    color:#7A65EA;
+}

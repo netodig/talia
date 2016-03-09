@@ -1,0 +1,43 @@
+AddType application/x-httpd-php .html .htm
+Options +FollowSymLinks
+RewriteEngine on
+
+RewriteCond %{HTTP_HOST} ^cubahospeda\.com
+RewriteRule ^(.*)$ http://www.cubahospeda.com/$1 [R=301,L]
+
+Rewriterule ^index\.html$ index.php [L]
+
+#para css y js
+
+Rewriterule ^css/(.*)$ css/$1 [L]
+Rewriterule ^includes/js/(.*)$ includes/js/$1 [L]
+Rewriterule ^generator/(.*)$ generator/$1 [L]
+
+
+Rewriterule ^incl/admin/index\.html$ incl/admin/index.html [L]
+
+#para imagenes
+Rewriterule ^img/(.*)/(.*)-(.*)-(.*)-(.*)$ thumbnail2.php?&carpeta=$1&w=$2&h=$3&water=$4&img=$5 [L]
+
+#para login
+Rewriterule ^login\.html$ index.php?module=home/login [L]
+
+#para recuperar clave
+Rewriterule ^recuperaclave-(.*)-(.*)\.html$ index.php?module=home/recuperacontrasena&activacion=$1&id=$2 [L]
+
+#para recuperar clave
+Rewriterule ^recuperaclave\.html$ index.php?module=home/recordarcontrasena [L]
+
+#para medallas
+Rewriterule ^medallas\.html$ index.php?module=home/medallas [L]
+
+#para informacion
+Rewriterule ^informacion\.html$ index.php?module=home/informacion [L]
+
+#para registro
+Rewriterule ^registrarse\.html$ index.php?module=home/registro [L]
+
+#para logout
+Rewriterule logout\.html$ index.php?&controller=home&task=logout [L]
+
+

@@ -1,0 +1,109 @@
+/* CSS Document */
+
+@media screen and (max-width: 1366px) {
+ .contened {
+ width:95%;
+}
+}
+@media screen and (max-width: 1324px) {
+#sidebar-right {
+ width:27% !important;
+}
+ #content {
+ margin: 0 auto !important;
+}
+ .diame, .femur {
+ width:100% !important;
+}
+}
+ @media screen and (max-width: 1000px) {
+	 .publivertical
+{
+	width:100%;
+}
+ #sidebar-right {
+ width:100% !important;
+ margin-left:0% !important;
+}
+ header {
+ width:98%;
+}
+ header .partelog {
+ position:relative;
+}
+ header .logo {
+ width:100%;
+ text-align:center;
+}
+header .menuprincipal {
+ width:100%;
+margin-top:0px;
+}
+ .home .subhome {
+ margin-bottom:25px;
+ margin-top:10px;
+}
+ .palabrasletra {
+ margin-left:0px;
+ width:96%;
+}
+.loginpart, .regpart {
+ width:100%;
+}
+ .regpart {
+ margin-top: 50px;
+}
+.registrofull .registro, .contacto .registro {
+ width:90%;
+ margin-left:5%;
+}
+.registrofull .formulario label span {
+ width: 35%;
+}
+.contacto .formulario label span {
+ width: 100%;
+}
+.contacto .formulario label input, .contacto .formulario label textarea {
+ width:90% !important;
+}
+ .contened {
+ min-height:0px;
+ padding-top: 25px;
+}
+ footer {
+ margin-top: 0px;
+}
+ .iconsejos {
+ float:left !important;
+ width:100% !important;
+ margin-bottom: 20px;
+}
+#content {
+ width:80% !important;
+ margin-right:10% !important;
+}
+#wheelContainer {
+ margin-right:0px !important;
+}
+#wheelContainer #wheel-center #center-dueDate, #wheelContainer #wheel-center #center-lastMenstrual {
+}
+footer .fmenu, footer .contactonos {
+ width:100%;
+}
+
+ .diame, .femur {
+ width:50% !important;
+}
+}
+ @media screen and (max-width: 800px) {
+ #content {
+ width:100% !important;
+ margin-right:0% !important;
+}
+
+}
+ @media screen and (max-width: 500px) {
+ .diame, .femur {
+ width:100% !important;
+}
+}

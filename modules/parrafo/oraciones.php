@@ -11,7 +11,9 @@ foreach($oraciones as $o)
 {
 	?>
     <label class="w100p">
-    	[<?php echo $o->g('numero') ?>] <input name="oracion<?php echo $o->g('numero') ?>" class="oracion" type="text" value="<?php echo $o->g('texto') ?>">  <input name="saltooracion<?php echo $o->g('numero') ?>" class="saltos" type="checkbox" <?php if($o->g('salto')){?> checked <?php } ?> value="1">
+    	[<?php echo $o->g('numero') ?>] <input name="oracion<?php echo $o->g('numero') ?>" class="oracion" type="text" value='<?php echo $o->g('texto') ?>'>  
+        
+        <input name="saltooracion<?php echo $o->g('numero') ?>" class="saltos" type="checkbox" <?php if($o->g('salto')){?> checked <?php } ?> value="1">
     </label>
     <?php
 }

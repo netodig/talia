@@ -99,8 +99,10 @@ $limit = "limit $next_recs, $rowLocal";
   <div class="tablediv">
     <table width="100%" border="0" cellspacing="0">
       <tr>
-        <th width="70%" ><?php echo $lang->g('PARRAFO') ?></th>
+        <th width="40%" ><?php echo $lang->g('PARRAFO') ?></th>
         <th width="15%"><?php echo $lang->g('CANT_ORACIONES') ?></th>
+        <th width="15%"><?php echo $lang->g('TRADUCIDO_A') ?></th>
+        <th width="15%"><?php echo $lang->g('POR_TRADUCIR') ?></th>
         <th width="15%" colspan="2"><?php echo $lang->g('OPCIONES') ?></th>
       </tr>
       <?php 
@@ -113,6 +115,30 @@ $limit = "limit $next_recs, $rowLocal";
       <tr class="<?php echo $par ?>" id="row<?php echo $c->g('id') ?>">
         <td><?php echo substr($c->g('texto'),0,200) ?>...</td>
         <td><?php echo $c->g('cantoraciones') ?></td>
+        <td><?php
+		$idiomasTrad=explode(",",$c->g('traducidos'));
+		
+		foreach($idiomasTrad as $idi)
+		{
+			?>
+         <?php echo $coma; ?> <a href="<?php echo Url::sitelink("parrafo/editlang","cid=".$c->g('id')."&cidh=$cid&clangp=".$idi) ?>"><?php echo $idi ?></a>
+            <?php
+			$coma=",";
+		}
+		
+		  ?></td>
+        <td><?php
+		$pidioma=new ParrafoExtend();
+		$pidioma=$pidioma->getLangsSintraducir($c->g('id'));
+		$coma="";
+		foreach($pidioma as $idi)
+		{
+			?>
+           <?php echo $coma; ?> <a href="<?php echo Url::sitelink("parrafo/editlang","cid=".$c->g('id')."&cidh=$cid&clangp=".$idi->g('lang')) ?>"><?php echo $idi->g('lang') ?></a>
+            <?php
+			$coma=",";
+		}	
+		 ?></td>
         <td><?php if($Acl->has("parrafo/listado",'edi')){?>
           <a href="<?php echo Url::sitelink("parrafo/edit","cid=".$c->g('id')."&cidh=$cid") ?>" class="mod"></a>
           <? }?></td>

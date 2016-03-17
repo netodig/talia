@@ -119,6 +119,13 @@ switch($task)
 			
 			$tipofoto = $_REQUEST["tipofoto"];
 			$cidfoto=$_REQUEST["cidfoto"];
+			
+			$cdesc = $_REQUEST['desc'];
+			$clevel = $_REQUEST['level'];
+			$ccat = $_REQUEST['cat'];
+			
+			if(!$ccat)
+			$ccat=0;
 
 			$primeravez=false;
 			if(!$cid)
@@ -129,6 +136,9 @@ switch($task)
 			$historia = new HistoryExtend();
 			$historia->setPkId($cid);			
 			$historia->setNombre($cnombre);
+			$historia->setCat($ccat);
+			$historia->setLevel($clevel);
+			$historia->setDescripcion($cdesc);
 			
 			if($primeravez)
 			{
@@ -227,6 +237,79 @@ switch($task)
 			
 		}
 		
+		
+		
+		case "savetraduceparrafo":
+		{
+			import("classes.parrafo");
+			
+			$com=array();
+			$com["message"]=$lang->g('ERROR_PROCESO');
+			$com["clase"]="errormsg";
+			
+			$cid = $_REQUEST['cid'];
+			$cidh = $_REQUEST['cidh'];
+			$clangp = $_REQUEST['langp'];
+			
+			//busco la historia
+			$history= new HistoryExtend();
+			$history=$history->getById($cidh);
+			
+			$ctextop = $_REQUEST['textop'];
+			//$ctextop= nl2br($ctextop);
+			
+			$parrafo= new ParrafolangExtend();
+			$parrafo=$parrafo->getByIdLanf($cid,$clangp);
+			$parrafo->setLang($clangp);
+			$parrafo->setTexto($ctextop);
+			$parrafo->setParrafo($cid);
+			
+			if($parrafo->save())
+			{
+				//salvo las oraciones
+				$cantoraciones= $_REQUEST['cantoraciones'];
+				
+				$ora= new OracionExtend();
+				$ora->deleteOraciones($cid,$clangp);
+				
+				for($i=1;$i<=$cantoraciones;$i++)
+				{
+					//voy insertando las oraciones
+					$ora= new OracionExtend();
+					$ora->setIdparrafo($cid);
+					$ora->setLang($clangp);
+					$ora->setTexto($_REQUEST["oracion$i"]);
+					$salto=$_REQUEST["saltooracion$i"];
+					if(!$salto)
+					{
+						$salto=0;
+					}
+					$ora->setSalto($salto);
+					$ora->setNumero($i);
+					$ora->Save();	
+				}
+			}
+			
+			$com["message"]=$lang->g('GUARDADO_CORRECTO');
+			$com["clase"]="goodmsg";
+
+				$idresp="prf";
+				$_SESSION['cmessage'.$idresp]=$com["message"];
+				$_SESSION['ccase'.$idresp]=$com["clase"];
+			
+				$retorno="parrafo/listado";
+				$flink="sitelink";
+				if($_REQUEST['return'])
+					$retorno=$_REQUEST['return'];
+					
+				if($_REQUEST['function'])
+					$flink=$_REQUEST['function'];	
+				
+				//header("location:".Url::$flink($retorno,"cid=$cid&idm=".$idresp));	
+			break;
+			
+		}
+		
 		case "saveparrafo":
 		{
 			import("classes.parrafo");
@@ -242,7 +325,11 @@ switch($task)
 			$history= new HistoryExtend();
 			$history=$history->getById($cidh);
 			
+			
+			
 			$ctextop = $_REQUEST['textop'];
+			//$ctextop= nl2br($ctextop);
+			
 			
 			//si el parrafo es nuevo genero las oraciones, y guardo el parrafo
 			if(!$cid)
@@ -251,6 +338,7 @@ switch($task)
 				$parrafo= new ParrafoExtend();
 				$parrafo->setTexto($ctextop);
 				$parrafo->setIdhistoria($cidh);
+				$ctextop=str_replace("\n","*@*",$ctextop);
 				
 				if($parrafo->save())
 				{
@@ -281,6 +369,8 @@ switch($task)
 				$parrafo= new ParrafoExtend();
 				$parrafo->setTexto($ctextop);
 				$parrafo->setPkId($cid);
+				$ctextop=str_replace("\n","*@*",$ctextop);
+				
 				
 				if($parrafo->save())
 				{
@@ -295,6 +385,7 @@ switch($task)
 						//voy insertando las oraciones
 						$ora= new OracionExtend();
 						$ora->setIdparrafo($cid);
+					
 						$ora->setLang($history->g('idiomaref'));
 						$ora->setTexto($o["oracion"]);
 						$ora->setSalto($o["salto"]);

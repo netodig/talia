@@ -41,7 +41,7 @@ define('MAIL_CONTACT', 'cronotec1@edgar.com');
 
 $IDIOMAS=array( "es"=>array("text"=>"Español","img"=>"spain.png","langcode"=>"es"),"en"=>array("text"=>"Inglés","img"=>"england.png","langcode"=>"en"));
 
-$TIPOSCOD=array("1"=>"Tipo de codificador");
+$TIPOSCOD=array("1"=>"Categorias");
 
 $tipoText=array(1=>"Administrador",2=>"Persona",3=>"Empresa");
 

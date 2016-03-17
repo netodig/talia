@@ -57,11 +57,13 @@
 						 
 			 
 		 }
-		 public function getListTipos($id,$limit="")
+		 public function getListTipos($id,$limit="",$seleccionar="")
 		 {
 			 $a = $this->getTipos($id,$limit="");
 			  
 			  $c= array();
+			  if($seleccionar)
+			  $c[""]=$seleccionar;
 			  foreach($a as $co)
 			  {
 				  $c[$co->g('id')]=$co->g('nombre');

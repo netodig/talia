@@ -13,8 +13,8 @@
 </div>
 <div class="menu hide_mobile">
   <ul>
-  	<li class="subm"><a href="<?php echo Url::adminlink("", "") ?>"><i class="fa fa-home"></i> Inicio</a>
-   
+  	<li class="subm"><a href="<?php echo Url::adminlink("", "") ?>"><i class="fa fa-home"></i> Inicio</a></li>
+    <li class="subm"><a href="<?php echo Url::adminlink("codificador/listado", "tipocod=1") ?>"><i class="fa fa-bookmark-o"></i> Categorias</a></li>
     <li class="subm"><a><i class="fa fa-user"></i> Usuario</a>
       <ul>
        <!-- <li><a href="<?php echo Url::adminlink("perfiles/modulos/listado") ?>"><i class="fa fa-cog"></i> Modulos</a></li>-->

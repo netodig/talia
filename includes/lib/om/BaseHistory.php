@@ -15,20 +15,23 @@
           $this->conn = JFactory::getDbo();          
           $this->Field = array(); 
           //aqui se van a guardar los formatos de los campos
-          $this->formatFields = array('nombre'=>"`history`.`nombre` = '%s'", 'idiomaref'=>"`history`.`idiomaref` = '%s'", 'creador'=>"`history`.`creador` = %s");
+          $this->formatFields = array('nombre'=>"`history`.`nombre` = '%s'", 'idiomaref'=>"`history`.`idiomaref` = '%s'", 'creador'=>"`history`.`creador` = %s", 'cat'=>"`history`.`cat` = %s", 'level'=>"`history`.`level` = '%s'", 'descripcion'=>"`history`.`descripcion` = '%s'");
           //listado de llaves primarias
           $this->listPk = array();
           //formato de las llaves primarias
           $this->listPkFormat = array("id"=>"`history`.`id` = %s");
           //listado de campos que contiene la tabla History
-          $this->listField = array("id"=>"id", "nombre"=>"nombre", "idiomaref"=>"idiomaref", "creador"=>"creador");
+          $this->listField = array("id"=>"id", "nombre"=>"nombre", "idiomaref"=>"idiomaref", "creador"=>"creador", "cat"=>"cat", "level"=>"level", "descripcion"=>"descripcion");
           //listado de campos que se modifican a traves del uso de la clase
           $this->listModifiedField = array();		  
           
           $this->Field["id"] = 0;
           $this->Field["nombre"] = "";
           $this->Field["idiomaref"] = "";
-          $this->Field["creador"] = 0;		  
+          $this->Field["creador"] = 0;
+          $this->Field["cat"] = 0;
+          $this->Field["level"] = "";
+          $this->Field["descripcion"] = "";		  
        }
             
        
@@ -51,7 +54,7 @@
        
        public function Insert()
        {
-          return $query = sprintf("insert into `history` (`history`.`nombre`, `history`.`idiomaref`, `history`.`creador`) VALUES('%s', '%s', %s)", $this->Field["nombre"], $this->Field["idiomaref"], $this->Field["creador"]);
+          return $query = sprintf("insert into `history` (`history`.`nombre`, `history`.`idiomaref`, `history`.`creador`, `history`.`cat`, `history`.`level`, `history`.`descripcion`) VALUES('%s', '%s', %s, %s, '%s', '%s')", $this->Field["nombre"], $this->Field["idiomaref"], $this->Field["creador"], $this->Field["cat"], $this->Field["level"], $this->Field["descripcion"]);
        }
        
        
@@ -123,7 +126,7 @@
        */
        public function SelectConditional($condition)
        {
-         $query = "select SQL_CALC_FOUND_ROWS `history`.`id`, `history`.`nombre`, `history`.`idiomaref`, `history`.`creador` from `history` $condition";
+         $query = "select SQL_CALC_FOUND_ROWS `history`.`id`, `history`.`nombre`, `history`.`idiomaref`, `history`.`creador`, `history`.`cat`, `history`.`level`, `history`.`descripcion` from `history` $condition";
           return $this->Hydrating($query);
        }
 	   
@@ -203,11 +206,17 @@
 
                 if($params["creador"]) $cond[] = "`history`.`creador`=".$params["creador"]; 
 
+                if($params["cat"]) $cond[] = "`history`.`cat`=".$params["cat"]; 
+
+                if($params["level"]) $cond[] = "`history`.`level`like '%".$params["level"]."%'"; 
+
+                if($params["descripcion"]) $cond[] = "`history`.`descripcion`like '%".$params["descripcion"]."%'"; 
+
                 $q = $cond[0] ? "where ".implode(" and ", $cond) : "";
 
                $limit = $maxRows ? "limit $startRows, $maxRows" : "";
 
-    	   return $this->Select("select SQL_CALC_FOUND_ROWS `history`.`id`, `history`.`nombre`, `history`.`idiomaref`, `history`.`creador` from `history` $q $limit");
+    	   return $this->Select("select SQL_CALC_FOUND_ROWS `history`.`id`, `history`.`nombre`, `history`.`idiomaref`, `history`.`creador`, `history`.`cat`, `history`.`level`, `history`.`descripcion` from `history` $q $limit");
     	}
       
       /**      
@@ -224,6 +233,12 @@
                 if($params["idiomaref"]) $cond[] = "`history`.`idiomaref`like '%".$params["idiomaref"]."%'"; 
 
                 if($params["creador"]) $cond[] = "`history`.`creador`=".$params["creador"]; 
+
+                if($params["cat"]) $cond[] = "`history`.`cat`=".$params["cat"]; 
+
+                if($params["level"]) $cond[] = "`history`.`level`like '%".$params["level"]."%'"; 
+
+                if($params["descripcion"]) $cond[] = "`history`.`descripcion`like '%".$params["descripcion"]."%'"; 
 
                 $q = $this->parseParams($cond);
 
@@ -301,6 +316,24 @@
          $this->listModifiedField["creador"] = true;
        }
 
+       public function setCat($Cat)
+       {
+         $this->Field["cat"] = $this->scapingData($Cat);
+         $this->listModifiedField["cat"] = true;
+       }
+
+       public function setLevel($Level)
+       {
+         $this->Field["level"] = $this->scapingData($Level);
+         $this->listModifiedField["level"] = true;
+       }
+
+       public function setDescripcion($Descripcion)
+       {
+         $this->Field["descripcion"] = $this->scapingData($Descripcion);
+         $this->listModifiedField["descripcion"] = true;
+       }
+
 
        
        /**
@@ -337,6 +370,21 @@
        function getCreador()
        {
          return $this->Field["creador"];
+       }
+
+       function getCat()
+       {
+         return $this->Field["cat"];
+       }
+
+       function getLevel()
+       {
+         return $this->Field["level"];
+       }
+
+       function getDescripcion()
+       {
+         return $this->Field["descripcion"];
        }
 
 

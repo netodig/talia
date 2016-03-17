@@ -98,6 +98,23 @@ function delparrafo(id)
 	BorrarBdext(id,"delparrafo","the paragrahp",'parrafo');
 }
 
+function actualizaParrafoTrans()
+{
+	icant= $('#cantoraciones').val();
+	
+	textaa="";
+	for(i=1;i<=icant;i++)
+	{
+		textaa+=$("#oracion"+i).val();
+		if($("#oracion"+i).val())
+		textaa+=". ";
+		if($("#saltooracion"+i).attr("checked"))
+		textaa+="\n";
+	}
+	$('#textop').val(textaa);
+	
+}
+
 
 
 

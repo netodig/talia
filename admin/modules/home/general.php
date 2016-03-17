@@ -11,6 +11,18 @@
         Usuarios</a></li>
     </ul>
   </div>
+  
+   <div class="panel">
+    <h2>Categorias </h2>
+    <ul>
+   <li class="subm"><a href="<?php echo Url::adminlink("codificador/listado", "tipocod=1") ?>"><i class="fa fa-bookmark-o fa-3x"></i><br> Listado</a></li>
+      <li><a href="<?php echo Url::adminlink("traduccion/idioma/listado") ?>"><i class="fa fa-plus-circle fa-3x"></i><br>
+        Agregar nueva</a></li>
+  
+    </ul>
+  </div>
+  
+  
   <div class="panel">
     <h2>Idiomas </h2>
     <ul>

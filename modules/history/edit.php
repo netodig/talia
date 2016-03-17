@@ -7,6 +7,9 @@ $history= new HistoryExtend();
 
 $cnombre = $_REQUEST['nombre'];
 $clanref = $_REQUEST['lanref'];
+$cdesc = $_REQUEST['desc'];
+$clevel = $_REQUEST['level'];
+$ccat = $_REQUEST['cat'];
 $ccreador = "";
 
 $titulo=$lang->g('LISTADO_PARRAFOS');
@@ -27,6 +30,10 @@ if($cid)
 		$clanref =$history->g('idiomaref');
 		$cfoto=$history->g('nombrearchivo');
 		$cidfoto=$history->g('idfoto');
+		
+		$cdesc =$history->g('descripcion');
+		$clevel =$history->g('level');
+		$ccat = $history->g('cat');
 	
 		$titulo=$lang->g('EDITAR_HISTORIA').$cnombre;
 
@@ -83,10 +90,11 @@ name="fotoprincipal" class="fileoculto" />
       </label>
     </div>
     <div class="fl col-md-5">
+    	<div class="col-md-12">
       <label><?php echo $lang->g('TITULO') ?>:<br />
         <input type="text" id="nombre" size="30" name="nombre" value="<?php echo $cnombre; ?>" />
       </label>
-      <label ><?php echo $lang->g('IDIOMA_REFERENCIA') ?>:<br />
+      <label class="mr2p" ><?php echo $lang->g('IDIOMA_REFERENCIA') ?>:<br />
         <?php 
 			$idiomasref= new IdiomasTExtend();
 			$idiomasref=$idiomasref->getIdiomas();
@@ -105,6 +113,24 @@ name="fotoprincipal" class="fileoculto" />
 			echo THelper::select('lanref', $idiref, $clanref,false,$array);
 			?>
       </label>
+      
+      <label class="mr2p"><?php echo $lang->g('CATEGORIA') ?>:<br />
+        <?php 
+			$catslist= new CodTiposExtend();
+			$catslist=$catslist->getListTipos(1,"",$lang->g('SELECCIONAR'));
+
+			echo THelper::select('cat', $catslist, $ccat,false);
+			?>
+      </label>
+      </div>
+      <div class="col-md-12">
+      	 <label><?php echo $lang->g('LEVEL') ?>:<br />
+        <input type="text" id="level" size="50" name="level" value="<?php echo $clevel; ?>" />
+      </label>
+       <label class="w100p"><?php echo $lang->g('DESCRIPCION') ?>:<br />
+       <textarea name="desc" id="desc" class="w100p" cols="40" rows="3"><?php echo $cdesc ?></textarea>
+      </label>
+      </div>
       
       <?php if($cid)
 	  {

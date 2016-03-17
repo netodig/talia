@@ -10,6 +10,9 @@ $titulo="";
 $cidhistory= $_REQUEST['cidh'];
 $history= new HistoryExtend();
 $titulo="";
+
+$clangp= $_REQUEST['clangp'];
+
 if($cidhistory)
 {
 	$history=$history->getHistoria($cidhistory);
@@ -18,21 +21,21 @@ if($cidhistory)
 		$history= $history[0];
 		$cnombre =$history->g('nombre');
 		$clanref =$history->g('idiomaref');
-		$titulo=sprintf($lang->g('AGREGAR_PARRAFO'),$cnombre);
+		$titulo=sprintf($lang->g('TRADUCIR_PARRAFO'),$cnombre,$clangp);
 	}
 }
 
-$parrafo= new ParrafoExtend();
+$parrafo= new ParrafolangExtend();
 $cid= $_REQUEST['cid'];
+
+
 if($cid)
 {
-	$parrafo=$parrafo->getById($cid);
+	$parrafo=$parrafo->getByIdLanf($cid,$clangp);
 	if($parrafo)
 	{
-	
-		$ctexto =$parrafo->g('texto');
-		$titulo=sprintf($lang->g('EDITAR_PARRAFO'),$cnombre);
 
+		$ctexto =$parrafo->g('texto');
 	}
 }
 global $com;
@@ -42,9 +45,9 @@ global $com;
 <form action="" method="post" id="formusuario" enctype="multipart/form-data" name="formusuario">
   <h1 class="fl"><?php echo $titulo ?></h1>
   <ul class="submenu">
-  	<li><a class="fr back" href="<?php echo Url::sitelink("history/edit","cid=$cidh") ?>"><?php echo $lang->g('VOLVER_HISTORIA') ?></a> </li>
+  	<li><a class="fr back" href="<?php echo Url::sitelink("history/edit","cid=$cidhistory") ?>"><?php echo $lang->g('VOLVER_HISTORIA') ?></a> </li>
     <li><span class="separator">|</span></li>
-    <li><a class="fr back" href="<?php echo Url::sitelink("parrafo/listado","cid=$cidh") ?>"><?php echo $lang->g('VOLVER_LISTADO') ?></a> </li>
+    <li><a class="fr back" href="<?php echo Url::sitelink("parrafo/listado","cid=$cidhistory") ?>"><?php echo $lang->g('VOLVER_LISTADO') ?></a> </li>
   </ul>
   <?php
   Msg::show();
@@ -63,7 +66,8 @@ global $com;
 	  if($cid)
 	  {
 		  $clang=$clanref; 
-		  include("oraciones.php");
+		  
+		  include("oracioneslang.php");
 	  }
 	  ?>
     </div>
@@ -72,8 +76,10 @@ global $com;
     <input class="cb" type="Submit" name="Submit" value="<?php echo $lang->g('GUARDAR') ?>" />
   </div>
   <input type="hidden" name="controller" value="general" />
-  <input type="hidden" name="task" value="saveparrafo" />
+  <input type="hidden" name="task" value="savetraduceparrafo" />
   <input type="hidden" name="cid" value="<?php echo $cid ?>" />
+  <input type="hidden" name="langp" value="<?php echo $clangp ?>" />
+  
   <input type="hidden" name="cidh" value="<?php echo $cidhistory ?>" />
 </form>
 <script type="text/javascript">
@@ -87,7 +93,7 @@ global $com;
 		debug: true,
 		errorElement: 'div',		
 		submitHandler: function(form){
-		
+		actualizaParrafoTrans();
 		form.submit();
 		}
 	});

@@ -42,7 +42,8 @@
 			$this->conn->voidQuery($this->Update());
      	  }
      	  else
-     	  {     	    
+     	  {     	
+		      
 			$this->conn->voidQuery($this->Insert());
             if($this->conn->getInsertId())
      	    $this->listPk["id"] = $this->conn->getInsertId();     	         	
